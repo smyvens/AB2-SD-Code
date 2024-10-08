@@ -4,7 +4,9 @@ import { LambdaClient, InvokeCommand } from "@aws-sdk/client-lambda";
 
 export default async function Home() {
   async function getImages(): Promise<string[]> {
-    const lambdaClient = new LambdaClient({});
+    const lambdaClient = new LambdaClient({
+      region: process.env.AWS_DEFAULT_REGION!,
+    });
 
     const response = await lambdaClient.send(
       new InvokeCommand({
