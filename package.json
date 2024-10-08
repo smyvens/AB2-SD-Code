@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-lambda": "^3.666.0",
     "file-saver": "^2.0.5",
     "next": "14.2.14",
     "react": "^18",
