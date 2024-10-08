@@ -7,7 +7,9 @@ export default function ClientLocation() {
 
   useEffect(() => {
     (async function () {
-      const fetchIp = await fetch("https://api.ipify.org/?format=json");
+      const fetchIp = await fetch("https://api.ipify.org/?format=json", {
+        cache: "no-store",
+      });
       const { ip } = await fetchIp.json();
 
       const response = await fetch(`https://ipapi.co/${ip}/json`);

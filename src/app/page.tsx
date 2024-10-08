@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { headers } from "next/headers";
 import ClientLocation from "@/components/ClientLocation";
 
 export default async function Home() {
