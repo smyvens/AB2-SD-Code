@@ -1,7 +1,8 @@
 "use client";
 
 import { saveAs } from "file-saver";
-import { useMemo } from "react";
+import { MouseEventHandler, useMemo } from "react";
+import { IoMdDownload } from "react-icons/io";
 interface DownloadFileProps {
   name: string;
 }
@@ -15,10 +16,7 @@ export default function DownloadFile({ name }: DownloadFileProps) {
     []
   );
 
-  async function handleDownload(
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) {
-    e.preventDefault();
+  async function handleDownload() {
     try {
       console.log(domainName);
       const response = await fetch(`${domainName}/${name}`);
@@ -31,8 +29,12 @@ export default function DownloadFile({ name }: DownloadFileProps) {
   }
 
   return (
-    <a href={"#"} onClick={handleDownload}>
-      download
-    </a>
+    <button
+      type="button"
+      onClick={handleDownload}
+      className="bg-white p-2 rounded-md"
+    >
+      <IoMdDownload className="text-black" />
+    </button>
   );
 }
