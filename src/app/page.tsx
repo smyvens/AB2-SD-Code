@@ -1,9 +1,10 @@
-import Image from "next/image";
 import ClientLocation from "@/components/ClientLocation";
-import { LambdaClient, InvokeCommand } from "@aws-sdk/client-lambda";
+import DownloadFile from "@/components/DownloadFile";
+import { InvokeCommand, LambdaClient } from "@aws-sdk/client-lambda";
+import Image from "next/image";
 
 export default async function Home() {
-  async function getImages(): Promise<string[]> {
+  async function getImages(): Promise<{ name: string; url: string }[]> {
     const lambdaClient = new LambdaClient({
       region: process.env.AWS_DEFAULT_REGION!,
     });
@@ -32,16 +33,18 @@ export default async function Home() {
         <h1 className="text-3xl font-bold my-10">Software Gallery</h1>
         <div className="grid grid-cols-3 gap-5">
           {images.map((img) => (
-            <Image
-              key={img}
-              src={img}
-              alt="some software"
-              width={0}
-              height={0}
-              style={{ width: "100%", height: "auto" }}
-              className="rounded-md object-fill"
-              unoptimized
-            />
+            <div key={img.name}>
+              <Image
+                src={img.url}
+                alt="some software"
+                width={0}
+                height={0}
+                style={{ width: "100%", height: "auto" }}
+                className="rounded-md object-fill"
+                unoptimized
+              />
+              <DownloadFile {...img} />
+            </div>
           ))}
         </div>
       </div>
