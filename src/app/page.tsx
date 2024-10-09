@@ -1,6 +1,6 @@
-import ClientLocation from "@/components/ClientLocation";
 import DownloadFile from "@/components/DownloadFile";
 import { InvokeCommand, LambdaClient } from "@aws-sdk/client-lambda";
+import { headers } from "next/headers";
 import Image from "next/image";
 
 export default async function Home() {
@@ -20,16 +20,35 @@ export default async function Home() {
     return JSON.parse(payload);
   }
 
+  function getClientLocation() {
+    const headersList = headers();
+
+    return {
+      city: headersList.get("CloudFront-Viewer-City"),
+      state: headersList.get("CloudFront-Viewer-Country-Region-Name"),
+      country: headersList.get("CloudFront-Viewer-Country-Name"),
+    };
+  }
+
   const images = await getImages();
+  const clientLocation = getClientLocation();
 
   return (
-    <main className="flex flex-col items-center justify-center pt-10">
-      <h1 className="font-bold text-5xl flex items-center gap-2">
-        <span>Request From:</span>
-        <ClientLocation />
-      </h1>
+    <main className="flex flex-col items-center justify-center pt-10 px-10">
+      <div className="flex gap-2 w-full font-bold text-5xl">
+        <h1>Request From:</h1>
+        <div className="text-blue-400">
+          <p>
+            <span className="mr-2">{clientLocation.city},</span>
+            <span>{clientLocation.state}</span>
+          </p>
+          <p>
+            <span>{clientLocation.country}</span>
+          </p>
+        </div>
+      </div>
 
-      <div className="mt-10 h-[80vh] w-[80vw]">
+      <div className="mt-5">
         <h1 className="text-3xl font-bold my-10">Software Gallery</h1>
         <div className="grid grid-cols-3 gap-5">
           {images.map((img) => (

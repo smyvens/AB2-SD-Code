@@ -2,7 +2,6 @@
 
 import { saveAs } from "file-saver";
 import { useMemo } from "react";
-
 interface DownloadFileProps {
   name: string;
 }
