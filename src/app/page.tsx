@@ -6,7 +6,7 @@ import Image from "next/image";
 export default async function Home() {
   async function getImages(): Promise<{ name: string; url: string }[]> {
     const lambdaClient = new LambdaClient({
-      region: process.env.AWS_DEFAULT_REGION!,
+      region: process.env.AWS_DEFAULT_REGION || "us-east-1",
     });
 
     const response = await lambdaClient.send(
