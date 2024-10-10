@@ -19,7 +19,9 @@ export default function DownloadFile({ name }: DownloadFileProps) {
   async function handleDownload() {
     try {
       console.log(domainName);
-      const response = await fetch(`${domainName}/${name}`);
+      const response = await fetch(`${domainName}/${name}`, {
+        cache: "force-cache",
+      });
       const blob = await response.blob();
 
       saveAs(blob, name);
