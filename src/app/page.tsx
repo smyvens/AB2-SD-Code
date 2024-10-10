@@ -38,6 +38,7 @@ export default async function Home() {
 
   const images = await getImages();
   const clientLocation = getClientLocation();
+
   return (
     <main className="flex flex-col items-center justify-center py-10 px-10">
       <div className="flex items-center justify-center gap-2 w-full font-bold text-5xl">
@@ -67,7 +68,7 @@ export default async function Home() {
           {images.map((img) => (
             <div key={img.name} className="relative w-80 h-80 group">
               <Image
-                src={`/${img.name}`}
+                src={img.url}
                 alt={img.name}
                 fill
                 priority
