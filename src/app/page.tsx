@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Fragment } from "react";
 import { CiLocationOn } from "react-icons/ci";
 
-
 export default async function Home() {
   async function getImages(): Promise<{ name: string; url: string }[]> {
     const lambdaClient = new LambdaClient({
@@ -40,6 +39,11 @@ export default async function Home() {
   const images = await getImages();
   const clientLocation = getClientLocation();
 
+  const domainName =
+    process.env.NODE_ENV === "development"
+      ? process.env.NEXT_PUBLIC_DOMAIN_NAME
+      : "";
+
   return (
     <main className="flex flex-col items-center justify-center py-10 px-10">
       <div className="flex items-center justify-center gap-2 w-full font-bold text-5xl">
@@ -69,11 +73,12 @@ export default async function Home() {
           {images.map((img) => (
             <div key={img.name} className="relative w-80 h-80 group">
               <Image
-                src={img.url}
+                src={`${domainName}/${img.name}`}
                 alt={img.name}
                 fill
+                priority
+                loading="eager"
                 className="rounded-md object-cover w-full h-full"
-                unoptimized
               />
               <div className="absolute h-full w-full z-10 bg-transparent group-hover:bg-black/60 opacity-0 group-hover:opacity-100 transition-all">
                 <h3 className="font-bold text-xl p-5 capitalize">
