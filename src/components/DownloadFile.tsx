@@ -1,7 +1,7 @@
 "use client";
 
 import { saveAs } from "file-saver";
-import { MouseEventHandler, useMemo } from "react";
+import { useMemo } from "react";
 import { IoMdDownload } from "react-icons/io";
 interface DownloadFileProps {
   name: string;

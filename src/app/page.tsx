@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Fragment } from "react";
 import { CiLocationOn } from "react-icons/ci";
 
-import { IoMdDownload } from "react-icons/io";
 
 export default async function Home() {
   async function getImages(): Promise<{ name: string; url: string }[]> {
