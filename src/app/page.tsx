@@ -71,8 +71,7 @@ export default async function Home() {
                 src={img.url}
                 alt={img.name}
                 fill
-                priority
-                loading="eager"
+                loading="lazy"
                 className="rounded-md object-cover w-full h-full"
                 unoptimized
               />
