@@ -1,7 +1,6 @@
 import DownloadFile from "@/components/DownloadFile";
 import { InvokeCommand, LambdaClient } from "@aws-sdk/client-lambda";
 import { headers } from "next/headers";
-import Image from "next/image";
 import { Fragment } from "react";
 import { CiLocationOn } from "react-icons/ci";
 
@@ -67,13 +66,11 @@ export default async function Home() {
         <div className="grid grid-cols-3 gap-5">
           {images.map((img) => (
             <div key={img.name} className="relative w-80 h-80 group">
-              <Image
+              <img
                 src={img.url}
                 alt={img.name}
-                fill
                 loading="lazy"
                 className="rounded-md object-cover w-full h-full"
-                unoptimized
               />
               <div className="absolute h-full w-full z-10 bg-transparent group-hover:bg-black/60 opacity-0 group-hover:opacity-100 transition-all">
                 <h3 className="font-bold text-xl p-5 capitalize">
